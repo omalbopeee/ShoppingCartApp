@@ -1,12 +1,26 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { CartState, Product } from '../utility/type/product';
 
-export const cartSlice = createSlice({
+const initialState: CartState = {
+  items: [],
+};
+
+const cartSlice = createSlice({
   name: 'cart',
-  initialState: {
-    value: 0,
-  },
+  initialState,
   reducers: {
+    addToCart: (state, action: PayloadAction<Product>) => {
+      //check item already in the cart
+      const existing = state.items.find(
+        item => item.product.id === action.payload.id,
+      );
 
+      if (existing) {
+        existing.quantity += 1;
+      } else {
+        state.items.push({ product: action.payload, quantity: 1 });
+      }
+    },
   },
 });
 

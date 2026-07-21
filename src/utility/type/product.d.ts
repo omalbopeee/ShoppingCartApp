@@ -4,3 +4,11 @@ export interface Product {
   price: number;
   image: string;
 }
+
+export interface CartItem {
+  product: Product,
+  quantity: number;
+}
+export interface CartState {
+  items: CartItem[]
+}
