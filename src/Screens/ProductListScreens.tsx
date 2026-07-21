@@ -31,13 +31,14 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   list: {
-    padding: 10,
+    padding: 16,
     paddingBottom: 10,
   },
   card: {
     flexDirection: 'row',
     alignItems: 'center',
     backgroundColor: 'white',
+    marginBottom: 10,
   },
   image: {
     width: 60,
@@ -50,11 +51,11 @@ const styles = StyleSheet.create({
   },
   name: {
     fontSize: 16,
-    fontWeight: 600,
+    fontWeight: '600',
   },
   price: {
     fontSize: 14,
-    fontWeight: 600,
+    fontWeight: '600',
     color: '#333',
     marginTop: 3,
   }
