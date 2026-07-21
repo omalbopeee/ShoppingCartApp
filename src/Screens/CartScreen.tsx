@@ -26,21 +26,30 @@ const CartScreen = () => {
       </View>
       <View style={styles.quantityRow}>
         <Pressable
-          style={styles.quantityButton}
+          style={({ pressed }) => [
+            styles.quantityButton,
+            pressed && styles.quantityButtonPressed,
+          ]}
           onPress={() => dispatch(decrementQuantity(item.product.id))}
         >
           <Text style={styles.quantityButtonText}>-</Text>
         </Pressable>
         <Text style={styles.quantity}>{item.quantity}</Text>
         <Pressable
-          style={styles.quantityButton}
+          style={({ pressed }) => [
+            styles.quantityButton,
+            pressed && styles.quantityButtonPressed,
+          ]}
           onPress={() => dispatch(incrementQuantity(item.product.id))}
         >
           <Text style={styles.quantityButtonText}>+</Text>
         </Pressable>
       </View>
       <Pressable
-        style={styles.removeButton}
+        style={({ pressed }) => [
+          styles.removeButton,
+          pressed && styles.removeButtonPressed,
+        ]}
         onPress={() => dispatch(removeFromCart(item.product.id))}
       >
         <Text style={styles.removeButtonText}>Remove</Text>
@@ -74,13 +83,15 @@ const styles = StyleSheet.create({
 
   card: {
     marginTop: 12,
-    borderWidth: 1,
-    borderRadius: 12,
-    padding: 16,
-    elevation: 1,
     marginHorizontal: 4,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
+    borderRadius: 20,
+    padding: 16,
+    backgroundColor: '#FFFFFF',
+    shadowColor: '#1a1a2e',
+    shadowOffset: { width: 0, height: 6 },
+    shadowOpacity: 0.1,
+    shadowRadius: 14,
+    elevation: 6,
   },
   info: {
     marginBottom: 10,
@@ -90,8 +101,16 @@ const styles = StyleSheet.create({
     fontWeight: '600',
   },
   price: {
-    fontSize: 14,
-    marginTop: 2,
+    fontSize: 13,
+    fontWeight: '700',
+    color: '#3A3A3C',
+    marginTop: 6,
+    backgroundColor: '#F0F0F3',
+    alignSelf: 'flex-start',
+    paddingHorizontal: 8,
+    paddingVertical: 3,
+    borderRadius: 8,
+    overflow: 'hidden',
   },
   quantityRow: {
     flexDirection: 'row',
@@ -99,17 +118,30 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   quantityButton: {
-    backgroundColor: '#e0e0e0',
+    backgroundColor: '#EAEAEC',
     width: 36,
     height: 36,
     borderRadius: 18,
     alignItems: 'center',
     justifyContent: 'center',
+    borderBottomWidth: 2,
+    borderBottomColor: '#C7C7CC',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.15,
+    shadowRadius: 2,
+    elevation: 2,
   },
   quantity: {
     fontSize: 14,
     fontWeight: '600',
     marginHorizontal: 16,
+  },
+  quantityButtonPressed: {
+    borderBottomWidth: 0,
+    transform: [{ translateY: 2 }],
+    shadowOpacity: 0,
+    elevation: 0,
   },
   quantityButtonText: {
     fontSize: 14,
@@ -122,11 +154,23 @@ const styles = StyleSheet.create({
   },
   removeButton: {
     alignSelf: 'flex-end',
-    borderRadius: 8,
-    borderWidth: 1,
-    backgroundColor: 'red',
-    paddingHorizontal: 7,
-    paddingVertical: 5,
+    borderRadius: 10,
+    backgroundColor: '#E63946',
+    paddingHorizontal: 14,
+    paddingVertical: 8,
+    borderBottomWidth: 3,
+    borderBottomColor: '#A72730',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 3 },
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+    elevation: 4,
+  },
+  removeButtonPressed: {
+    borderBottomWidth: 0,
+    transform: [{ translateY: 3 }],
+    shadowOpacity: 0,
+    elevation: 0,
   },
   total: {
     position: 'absolute',
@@ -138,16 +182,22 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingHorizontal: 24,
     paddingVertical: 16,
-    borderTopWidth: 1,
-    borderColor: '#e0e0e0',
+    backgroundColor: '#FFFFFF',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: -3 },
+    shadowOpacity: 0.08,
+    shadowRadius: 8,
+    elevation: 8,
   },
   totalLabel: {
     fontSize: 16,
     fontWeight: '600',
+    color: '#1C1C1E',
   },
   totalAmount: {
-    fontSize: 14,
-    fontWeight: '600',
+    fontSize: 18,
+    fontWeight: '700',
+    color: '#1C1C1E',
   },
 });
 
