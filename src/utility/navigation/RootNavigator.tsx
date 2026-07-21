@@ -39,7 +39,7 @@ const RootNavigator = () => {
           name="Cart"
           component={CartScreen}
           options={{
-            title: 'Products',
+            title: 'cart',
             tabBarIcon: focused => <CartTabIcon focused />,
           }}
         />

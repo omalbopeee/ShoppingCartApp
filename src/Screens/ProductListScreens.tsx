@@ -1,21 +1,35 @@
 import React from 'react';
-import { FlatList, Image, StyleSheet, Text, View } from 'react-native';
+import { FlatList, Image, Pressable, StyleSheet, Text, View } from 'react-native';
 import { products } from '../utility/data/product-data.ts';
 import { Product } from '../utility/type/product';
+import { useAppDispatch } from '../store/hooks.ts';
+import { addToCart } from '../store/cartSlice.ts';
 
 const ProductListScreens = () => {
-  const renderProducts = ({item}: {item: Product}) => (
+
+  const dispatch = useAppDispatch();
+  const handleAddToCart = (item: Product) => {
+      dispatch(addToCart(item));
+  };
+
+  const renderProducts = ({ item }: { item: Product }) => (
     <View style={styles.card}>
-      <Image source = {{uri: item.image }} style={styles.image} />
+      <Image source={{ uri: item.image }} style={styles.image} />
       <View style={styles.info}>
         <Text style={styles.name}>{item.name}</Text>
         <Text style={styles.price}>{item.price}</Text>
       </View>
+      <Pressable style={styles.addButton} onPress={() => handleAddToCart(item)}>
+        <Text style={styles.addButtonText}>
+          Add To Cart
+        </Text>
+
+      </Pressable>
     </View>
-  )
+  );
 
   return (
-    <View style = {styles.container}>
+    <View style={styles.container}>
       <FlatList
         data={products}
         renderItem={renderProducts}
@@ -58,8 +72,19 @@ const styles = StyleSheet.create({
     fontWeight: '600',
     color: '#333',
     marginTop: 3,
-  }
+  },
+  addButton: {
+    backgroundColor: 'black',
+    paddingHorizontal: 7,
+    paddingVertical: 4,
+    borderRadius: 8,
+  },
+  addButtonText: {
+    color: 'white',
+    fontWeight: '600',
+    fontSize: 14,
 
-})
+  }
+});
 
 export default ProductListScreens;
